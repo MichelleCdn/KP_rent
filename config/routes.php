@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
+
 return [
 
     /*
@@ -51,6 +55,9 @@ return [
 
     'web' => [
         /** @inject web **/
+        AuthController::class,
+        DashboardController::class,
+        UserController::class,
     ],
     'api' => [
         /** @inject api **/
