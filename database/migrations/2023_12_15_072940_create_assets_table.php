@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id'); // Elektronik, Buku, Fashion,
             $table->string('name');
             $table->foreignId('price');
-            $table->string('type'); // Elektronik, Buku, Fashion,
+            $table->foreignId('stock');
             $table->string('size');
             $table->text('additional_info')->nullable();
             $table->timestamps();

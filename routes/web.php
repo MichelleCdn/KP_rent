@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AssetCategoryController;
+use App\Http\Controllers\AssetController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
-    return redirect()->route('view-login');
+    return redirect()->route('login');
 });
+
+Route::prefix('tools')->as('tools.')->group(function () {
+    Route::resource('categories', AssetCategoryController::class);
+});
+Route::resource('tools', AssetController::class);
+
 
 // Auth::routes();
 

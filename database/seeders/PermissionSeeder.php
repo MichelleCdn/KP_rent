@@ -76,6 +76,7 @@ class PermissionSeeder extends Seeder
             ]);
             foreach ($data['permissions'] as $key => $value) {
                 $role->givePermissionTo($value);
+                
             }
         }
     }

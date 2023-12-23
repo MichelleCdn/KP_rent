@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Asset extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    /**
+     * Get the category that owns the Asset
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(AssetCategory::class, 'category_id', 'id');
+    }
 }
