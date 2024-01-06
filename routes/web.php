@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AssetCategoryController;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,11 +24,15 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+
+
 Route::prefix('tools')->as('tools.')->group(function () {
     Route::resource('categories', AssetCategoryController::class);
 });
-Route::resource('tools', AssetController::class);
 
+Route::resource('tools', AssetController::class);
+Route::resource('transactions', TransactionController::class);
+Route::resource('customers', CustomerController::class);
 
 // Auth::routes();
 

@@ -11,8 +11,12 @@ class AssetController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (request()->wantsJson()) {
+            $assets     = Asset::with('category')->get();
+            return response()->json($assets->toArray());
+        }
         $assets     = Asset::with('category')->get();
         $categories = AssetCategory::all();
         return view('asset.index', compact('assets', 'categories'));
@@ -42,7 +46,7 @@ class AssetController extends Controller
 
         $asset = Asset::create($request->except('_method'));
 
-        alert()->success('Berhasil!','Alat Telah Berhasil Disimpan!');
+        alert()->success('Berhasil!', 'Alat Telah Berhasil Disimpan!');
 
         return redirect()->route('tools.index');
     }
@@ -79,7 +83,7 @@ class AssetController extends Controller
 
         $tool->update($request->except('_method'));
 
-        alert()->success('Berhasil!','Alat Telah Berhasil Dirubah!');
+        alert()->success('Berhasil!', 'Alat Telah Berhasil Dirubah!');
 
         return redirect()->route('tools.index');
     }
@@ -91,7 +95,7 @@ class AssetController extends Controller
     {
         $tool->delete();
 
-        alert()->success('Berhasil!','Alat Telah Berhasil Dihapus!');
+        alert()->success('Berhasil!', 'Alat Telah Berhasil Dihapus!');
 
         return redirect()->route('tools.index');
     }

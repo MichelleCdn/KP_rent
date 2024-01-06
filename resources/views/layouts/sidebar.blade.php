@@ -46,6 +46,22 @@
 
             <ul>
                 <li>
+                    <div class="menu-title">Pengguna</div>
+
+                    <ul>
+                        <li>
+                            <a href="{{route('customers.index')}}">
+                                <span>
+                                    <i class="fa-regular fa-users"></i>
+                                    <span>Data Pelanggan</span>
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li>
                     <div class="menu-title">Asset / Alat Pinjaman</div>
 
                     <ul>
@@ -62,6 +78,21 @@
                                 <span>
                                 <i class="fa-regular fa-list"></i>
                                     <span>Kategori Alat</span>
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li>
+                    <div class="menu-title">Transaksi</div>
+                    <ul>
+                        <li>
+                            <a href="{{route('transactions.index')}}">
+                                <span>
+                                    <i class="fa-regular fa-receipt"></i>
+                                    <span>Data Transaksi</span>
                                 </span>
                             </a>
                         </li>
