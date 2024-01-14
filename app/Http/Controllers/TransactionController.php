@@ -18,6 +18,10 @@ class TransactionController extends Controller
         return view('transaction.index', compact('transactions', 'assets', 'customers'));
     }
 
+    function show(Transaction $transaction) {
+        return view('transaction.detail', compact('transaction'));
+    }
+
     function store(Request $request)
     {
         //check asset's stock

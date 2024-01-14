@@ -190,7 +190,7 @@
                                                 {{ $item->end_at->format('d F Y') }}
                                             </td>
                                             <td>
-                                                {{ $item->total_price }}
+                                                Rp. {{ number_format($item->total_price,2,",",".") }}
                                             </td>
                                             <td>
                                                 {{ ucfirst($item->status) }}
@@ -217,6 +217,10 @@
                                                                 Status</a>
                                                         </li>
                                                     @endif
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('transactions.show', $item->id) }}">Detail</a>
+                                                    </li>
                                                     <li>
                                                         <a class="dropdown-item btn-hapus"
                                                             href="{{ route('transactions.destroy', $item->id) }}">Hapus</a>

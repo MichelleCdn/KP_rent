@@ -53,7 +53,7 @@
     <!-- Custom -->
     <link rel="stylesheet" type="text/css" href="{{ asset('') }}assets/css/style.css">
 
-    <title>E-Rent : Sistem Peminjaman Online Terpusat - Admin</title>
+    <title>E-Rent : Sistem Peminjaman Online Terpusat - @yield('title', 'Admin')</title>
 
     {{-- added csses --}}
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.0.0/css/all.css" />
