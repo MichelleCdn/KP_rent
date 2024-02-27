@@ -34,6 +34,9 @@ Route::resource('tools', AssetController::class);
 Route::resource('transactions', TransactionController::class);
 Route::resource('customers', CustomerController::class);
 
+// Route::get('/transactions/search', 'TransactionController@search')->name('transactions.search');
+
+
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

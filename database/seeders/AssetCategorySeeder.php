@@ -15,14 +15,14 @@ class AssetCategorySeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'Perabotan'
+                'name' => 'Alat Konstruksi'
             ],
-            [
-                'name' => 'Elektronik'
-            ],
-            [
-                'name' => 'Buku'
-            ],
+            // [
+            //     'name' => 'Elektronik'
+            // ],
+            // [
+            //     'name' => 'Buku'
+            // ],
         ];
 
         foreach ($data as $value) {

@@ -68,6 +68,9 @@ invoice_{{$transaction->created_at->format('dmy')}}
                                                     <th scope="col"
                                                         class="pt-0 px-0 pb-14 bg-transparent hp-invoice-table-th text-center">
                                                         Jumlah</th>
+                                                        <th scope="col"
+                                                        class="pt-0 px-0 pb-14 bg-transparent hp-invoice-table-th text-center">
+                                                        Ongkos Kirim</th>
                                                     <th scope="col"
                                                         class="pt-0 ps-0 pb-14 bg-transparent hp-invoice-table-th text-end">
                                                         Subtotal</th>
@@ -87,6 +90,9 @@ invoice_{{$transaction->created_at->format('dmy')}}
                                                     </td>
                                                     <td class="py-6 px-0 text-center">
                                                         <p>{{ $transaction->quantity }}</p>
+                                                    </td>
+                                                    <td class="py-6 pe-0">
+                                                        <p>{{ number_format($transaction->shipping_fee, 2, ',', '.') }}</p>
                                                     </td>
                                                     <td class="py-6 ps-0 text-end">
                                                         <h5>Rp. {{ number_format($transaction->total_price, 2, ',', '.') }}
