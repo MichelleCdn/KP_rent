@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Asset;
 use App\Models\Customer;
 use App\Models\Transaction;
@@ -12,7 +13,7 @@ class TransactionController extends Controller
 {
     function index()
     {
-        $transactions = Transaction::all();
+        $transactions = Transaction::all(); 
         $assets       = Asset::all();
         $customers    = Customer::all();
         return view('transaction.index', compact('transactions', 'assets', 'customers'));
@@ -69,8 +70,19 @@ class TransactionController extends Controller
         if ($request->status == 'telah dikembalikan') {
             $asset         = $transaction->asset;
             $asset->stock += $transaction->quantity;
-
             $asset->save();
+            // Transaction Date Back
+            $transaction->date_back = Carbon::now();
+            // Fine
+            $end_at = Carbon::parse($transaction->end_at);
+            $date_now = Carbon::now();
+            $numberOfDays = $end_at->gt($date_now) ? -1 * $end_at->diffInDays($date_now) : $end_at->diffInDays($date_now);
+            $fine_back =  0;
+            if($numberOfDays > 0){
+                $fine_back = $numberOfDays * (env('FINE_BACK') ? env('FINE_BACK') : 10000);
+            }
+
+            $transaction->fine_back = $fine_back;
         }
 
         $transaction->save();

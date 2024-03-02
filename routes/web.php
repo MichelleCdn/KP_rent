@@ -34,7 +34,11 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('tools', AssetController::class)->only(['store','update','destroy'])->middleware('admin');
 
     Route::resource('transactions', TransactionController::class);
+    Route::resource('transactions', TransactionController::class)->only(['store','update','destroy'])->middleware('admin');
+
     Route::resource('customers', CustomerController::class);
+    Route::resource('customers', CustomerController::class)->only(['store','update','destroy'])->middleware('admin');
+
 });
 
 

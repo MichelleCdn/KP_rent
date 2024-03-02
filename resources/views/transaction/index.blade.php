@@ -138,9 +138,11 @@
                     <p class="hp-p1-body mb-0">Berikut merupakan tabel berisi list transaksi yang tersedia di database.</p>
                 </div>
                 <div class="col-12 col-md-2">
+                    @if (auth()->user()->hasRole('admin'))
                     <button class="btn btn-primary btn-modal" data-method="POST" data-title="Buat Transaksi"
                         data-bs-toggle="modal" data-bs-target="#transactionFormModal"
                         data-route="{{ route('transactions.store') }}">Pinjam Barang</button>
+                    @endif
                 </div>
                 <div class="col-12">
                     <div class="rounded-top border-start border-end border-top border-black-40 hp-border-color-dark-80">
@@ -157,7 +159,9 @@
                                         <th>Selesai Tanggal</th>
                                         <th>Total Biaya</th>
                                         <th>Status</th>
+                                        @if (auth()->user()->hasRole('admin'))
                                         <th>Aksi</th>
+                                        @endif
                                     </tr>
                                 </thead>
 
@@ -190,12 +194,12 @@
                                                 {{ $item->end_at->format('d F Y') }}
                                             </td>
                                             <td>
-                                                Rp. {{ number_format($item->total_price,2,",",".") }}
+                                                Rp. {{ number_format($item->total_price,2,",",".") }} {{ $item->fine_back != 0 ? '+ ( Rp. '.number_format($item->fine_back,2,",",".").' - Denda) ' : ""}}
                                             </td>
                                             <td>
                                                 {{ ucfirst($item->status) }}
                                             </td>
-
+                                            @if (auth()->user()->hasRole('admin'))
                                             <td>
                                                 <div class="d-inline-block" id="profile-menu-dropdown"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -227,6 +231,7 @@
                                                     </li>
                                                 </ul>
                                             </td>
+                                            @endif
                                         </tr>
                                     @empty
                                         <tr>

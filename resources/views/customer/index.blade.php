@@ -50,8 +50,10 @@
                     <p class="hp-p1-body mb-0">Berikut merupakan tabel berisi list pelanggan yang tersedia di database.</p>
                 </div>
                 <div class="col-12 col-md-2">
+                    @if (auth()->user()->hasRole('admin'))
                     <button class="btn btn-primary btn-modal" data-method="POST" data-title="Tambah Pelanggan" data-bs-toggle="modal"
                         data-bs-target="#customerFormModal" data-route="{{ route('customers.store') }}">Tambah</button>
+                    @endif
                 </div>
                 <div class="col-12">
                     <div class="rounded-top border-start border-end border-top border-black-40 hp-border-color-dark-80">
@@ -63,7 +65,9 @@
                                         <th>Nama Pelanggan</th>
                                         <th>Nomor Telepon</th>
                                         <th>Alamat</th>
+                                        @if (auth()->user()->hasRole('admin'))
                                         <th class="text-center">Aksi</th>
+                                        @endif
                                     </tr>
                                 </thead>
 
@@ -85,7 +89,7 @@
                                             <td class="align-middle">
                                                 {{ $item->address }}
                                             </td>
-
+                                            @if (auth()->user()->hasRole('admin'))
                                             <td class="align-middle text-center">
                                                 <div class="d-inline-block" id="profile-menu-dropdown"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -108,6 +112,7 @@
                                                     </li>
                                                 </ul>
                                             </td>
+                                            @endif
                                         </tr>
                                     @empty
                                         <tr>

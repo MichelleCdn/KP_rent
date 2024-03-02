@@ -107,12 +107,52 @@ invoice_{{$transaction->created_at->format('dmy')}}
 
                             <div class="divider"></div>
 
+                            @if ($transaction->fine_back != null || $transaction->fine_back != 0)
+                            <div class="row mx-n24">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="pt-0 pe-0 pb-14 bg-transparent ">Denda Pengembalian/Hari
+                                                    </th>
+                                                    <th scope="col"
+                                                        class="pt-0 pe-0 pb-14 bg-transparent hp-invoice-table-th ">
+                                                        Total Hari</th>
+                                                    <th scope="col"
+                                                        class="pt-0 pe-0 pb-14 bg-transparent hp-invoice-table-th">Denda
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr>
+                                                    <td class="py-6 pe-0">
+                                                        <p>{{ env('FINE_BACK') ? env('FINE_BACK') : 100000 }}</p>
+                                                    </td>
+                                                    <td class="py-6">
+                                                        <p>Rp. {{ $transaction->fine_back/(env('FINE_BACK') ? env('FINE_BACK') : 100000)   }} Hari</p>
+                                                    </td>
+                                                    <td class="py-6 ps-0">
+                                                        <h5>Rp. {{ number_format($transaction->fine_back, 2, ',', '.') }}
+                                                        </h5>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="divider"></div>
+                            @endif
+
                             <div class="row justify-content-end">
                                 <div class="col-12 col-xl-4 pb-16 hp-print-checkout">
                                     <div class="row align-items-between justify-content-center flex-column align-items-end">
                                         <h5 class="text-primary hp-flex-none w-auto">Total</h5>
                                         <h5 class="text-primary hp-flex-none w-auto">Rp.
-                                            {{ number_format($transaction->total_price, 2, ',', '.') }}</h5>
+                                            {{ number_format($transaction->total_price + $transaction->fine_back, 2, ',', '.') }}</h5>
                                     </div>
                                 </div>
                             </div>
