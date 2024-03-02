@@ -155,7 +155,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100">
-                            <a href="#" class="d-block w-100" style="color: inherit;">Sign in</a>
+                            <span class="d-block w-100" style="color: inherit;">Sign in</span>
                         </button>
                     </form>
 
