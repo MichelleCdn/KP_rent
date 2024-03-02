@@ -42,8 +42,10 @@
                     <p class="hp-p1-body mb-0">Berikut merupakan tabel berisi list kategori alat yang tersedia di database.</p>
                 </div>
                 <div class="col-12 col-md-2">
+                    @if (auth()->user()->hasRole('admin'))
                     <button class="btn btn-primary btn-modal" data-method="POST" data-title="Tambah Kategori" data-bs-toggle="modal"
                         data-bs-target="#categoryFormModal" data-route="{{ route('tools.categories.store') }}">Tambah</button>
+                    @endif
                 </div>
                 <div class="col-12">
                     <div class="rounded-top border-start border-end border-top border-black-40 hp-border-color-dark-80">
@@ -55,7 +57,9 @@
                                         <th>Nama Kategori Alat</th>
                                         <th class="text-center">Jumlah Alat Terdaftar</th>
                                         <th class="text-center">Dibuat Tanggal</th>
+                                        @if (auth()->user()->hasRole('admin'))
                                         <th class="text-center">Aksi</th>
+                                        @endif
                                     </tr>
                                 </thead>
 
@@ -77,6 +81,7 @@
                                             <td class="align-middle">
                                                 {{ $item->created_at->format('d F Y') }}
                                             </td>
+                                            @if (auth()->user()->hasRole('admin'))
                                             <td class="align-middle">
                                                 <div class="d-inline-block" id="profile-menu-dropdown"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -99,6 +104,7 @@
                                                     </li>
                                                 </ul>
                                             </td>
+                                            @endif
                                         </tr>
                                     @empty
                                         <tr>

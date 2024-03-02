@@ -66,8 +66,10 @@
                     <p class="hp-p1-body mb-0">Berikut merupakan tabel berisi list alat yang tersedia di database.</p>
                 </div>
                 <div class="col-12 col-md-2">
+                    @if (auth()->user()->hasRole('admin'))
                     <button class="btn btn-primary btn-modal" data-method="POST" data-title="Tambah Alat" data-bs-toggle="modal"
                         data-bs-target="#assetFormModal" data-route="{{ route('tools.store') }}">Tambah</button>
+                    @endif
                 </div>
                 <div class="col-12">
                     <div class="rounded-top border-start border-end border-top border-black-40 hp-border-color-dark-80">
@@ -82,7 +84,9 @@
                                         <th class="text-center">Jenis</th>
                                         <th class="text-center">Ukuran</th>
                                         <th>Keterangan Tambahan</th>
-                                        <th class="text-center">Aksi</th>
+                                        @if (auth()->user()->hasRole('admin'))
+                                            <th class="text-center">Aksi</th>
+                                        @endif
                                     </tr>
                                 </thead>
 
@@ -115,28 +119,31 @@
                                                 {{ $item->additional_info }}
                                             </td>
 
-                                            <td class="align-middle text-center">
-                                                <div class="d-inline-block" id="profile-menu-dropdown"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <button type="button" class="btn btn-text btn-icon-only">
-                                                        <i class="ri-more-2-line text-black-100 hp-text-color-dark-30 lh-1"
-                                                            style="font-size: 24px;"></i>
-                                                    </button>
-                                                </div>
+                                            @if (auth()->user()->hasRole('admin'))
+                                                <td class="align-middle text-center">
+                                                    <div class="d-inline-block" id="profile-menu-dropdown"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <button type="button" class="btn btn-text btn-icon-only">
+                                                            <i class="ri-more-2-line text-black-100 hp-text-color-dark-30 lh-1"
+                                                                style="font-size: 24px;"></i>
+                                                        </button>
+                                                    </div>
+    
+                                                    <ul class="dropdown-menu" aria-labelledby="profile-menu-dropdown">
+                                                        <li>
+                                                            <a class="dropdown-item btn-modal btn-edit" data-bs-toggle="modal"
+                                                                data-bs-target="#assetFormModal" data-method="PUT"
+                                                                data-title="Edit Alat" href="javascript:;"
+                                                                data-route="{{ route('tools.update', $item->id) }}"
+                                                                data-item="{{ json_encode($item->toArray()) }}">Edit</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item btn-hapus" href="{{route('tools.destroy', $item->id)}}">Hapus</a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            @endif
 
-                                                <ul class="dropdown-menu" aria-labelledby="profile-menu-dropdown">
-                                                    <li>
-                                                        <a class="dropdown-item btn-modal btn-edit" data-bs-toggle="modal"
-                                                            data-bs-target="#assetFormModal" data-method="PUT"
-                                                            data-title="Edit Alat" href="javascript:;"
-                                                            data-route="{{ route('tools.update', $item->id) }}"
-                                                            data-item="{{ json_encode($item->toArray()) }}">Edit</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item btn-hapus" href="{{route('tools.destroy', $item->id)}}">Hapus</a>
-                                                    </li>
-                                                </ul>
-                                            </td>
                                         </tr>
                                     @empty
                                         <tr>

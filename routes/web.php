@@ -24,15 +24,19 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::middleware(['auth'])->group(function(){
+    Route::prefix('tools')->as('tools.')->group(function () {
+        Route::resource('categories', AssetCategoryController::class);
+        Route::resource('categories', AssetCategoryController::class)->only(['store','update','destroy'])->middleware('admin');
+    });
+    //Tools
+    Route::resource('tools', AssetController::class);
+    Route::resource('tools', AssetController::class)->only(['store','update','destroy'])->middleware('admin');
 
-
-Route::prefix('tools')->as('tools.')->group(function () {
-    Route::resource('categories', AssetCategoryController::class);
+    Route::resource('transactions', TransactionController::class);
+    Route::resource('customers', CustomerController::class);
 });
 
-Route::resource('tools', AssetController::class);
-Route::resource('transactions', TransactionController::class);
-Route::resource('customers', CustomerController::class);
 
 // Route::get('/transactions/search', 'TransactionController@search')->name('transactions.search');
 
