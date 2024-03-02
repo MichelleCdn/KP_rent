@@ -145,6 +145,42 @@
                     @endif
                 </div>
                 <div class="col-12">
+                    {{-- Filter --}}
+                    <div class="rounded bg-white" style="padding: 5px; margin-bottom:5px;">
+                       <form action="{{ route('transactions-filter-index') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-0">
+                                        <label for="sizeLabel" class="form-label">Mulai Sewa</label>
+                                        {{-- <input type="date" name="start_at" class="form-control" id="sizeLabel"> --}}
+                                        <input type="date" name="start_at" class="form-control" placeholder="Mulai Sewa"
+                                            aria-label="Mulai Sewa">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-0">
+                                        <label for="statusLabel" class="form-label">Status</label>
+                                        <select class="form-control" name="status" id="statusLabel" placeholder="Pilih Pelanggan">
+                                            @php
+                                                $status = isset($status) ? $status : '';
+                                            @endphp
+                                            <option value="dipesan" {{ $status  == 'dipesan' ? 'selected' : '' }}>Dipesan</option>
+                                            <option value="sedang disewakan" {{ $status  == 'sedang disewakan' ? 'selected' : '' }}>Sedang Disewakan</option>
+                                            <option value="telah dikembalikan" {{ $status  == 'telah dikembalikan' ? 'selected' : '' }} >Telah Dikembalikan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label for="sizeLabel" class="form-label"></label>
+                                    <div class="d-flex flex-center">
+                                        <a href="{{ route('transactions.index') }}" class="btn btn-text me-5">Reset</a>
+                                        <button type="submit" id="btnFilter" class="btn btn-primary">Terapkan</button>
+                                    </div>
+                                </div>
+                            </div>
+                       </form>
+                    </div>
                     <div class="rounded-top border-start border-end border-top border-black-40 hp-border-color-dark-80">
                         <div class="table-responsive">
                             <table class="table mb-0 table-hover">
@@ -252,6 +288,7 @@
 @push('post-script')
     <script>
         $(document).ready(function() {
+        
             // $.ajax({
             //     type: "GET",
             //     url: "{{ route('tools.index') }}",
@@ -323,6 +360,9 @@
 
                 $('#totalLabel').val(Number(total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
             }
+
+            
+
 
         });
     </script>

@@ -34,6 +34,8 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('tools', AssetController::class)->only(['store','update','destroy'])->middleware('admin');
 
     Route::resource('transactions', TransactionController::class);
+    Route::post('transactions-filter', [TransactionController::class,'filterIndex'])->name('transactions-filter-index');
+
     Route::resource('transactions', TransactionController::class)->only(['store','update','destroy'])->middleware('admin');
 
     Route::resource('customers', CustomerController::class);

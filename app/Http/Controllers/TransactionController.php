@@ -19,6 +19,22 @@ class TransactionController extends Controller
         return view('transaction.index', compact('transactions', 'assets', 'customers'));
     }
 
+    public function filterIndex(Request $request)
+    {
+        $status = $request->get('status');
+        $date = $request->get('start_at');
+        $desiredDate = Carbon::parse($date);
+        if($date){
+            $transactions = Transaction::where('start_at', $desiredDate->toDateTimeString())->where('status',$status)->get(); 
+        }
+        else{
+            $transactions = Transaction::where('status',$status)->get(); 
+        }
+        $assets       = Asset::all();
+        $customers    = Customer::all();
+        return view('transaction.index', compact('transactions', 'assets', 'customers','status'));
+    }
+
     function show(Transaction $transaction) {
         return view('transaction.detail', compact('transaction'));
     }
