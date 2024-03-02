@@ -79,7 +79,7 @@ class TransactionController extends Controller
             $numberOfDays = $end_at->gt($date_now) ? -1 * $end_at->diffInDays($date_now) : $end_at->diffInDays($date_now);
             $fine_back =  0;
             if($numberOfDays > 0){
-                $fine_back = $numberOfDays * (env('FINE_BACK') ? env('FINE_BACK') : 10000);
+                $fine_back = $numberOfDays * (env('FINE_BACK') ? env('FINE_BACK') : 100000);
             }
 
             $transaction->fine_back = $fine_back;
